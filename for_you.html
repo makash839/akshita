@@ -3,73 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>Akshita, will you be my Valentine?</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #ffe4e6; /* Soft Pink */
+            background-color: #fce7f3; /* Light Pink */
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin: 0;
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
-        .container {
-            text-align: center;
+        .card {
             background: white;
-            padding: 2rem;
-            border-radius: 1.5rem;
-            shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 350px;
+            padding: 2.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            transition: all 0.5s ease;
         }
         #noBtn {
             position: absolute;
-            transition: 0.3s ease;
+            transition: 0.2s ease;
+            z-index: 10;
         }
-        .heart {
-            color: #e11d48;
-            font-size: 4rem;
-            animation: beat 1s infinite;
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 2rem;
+            height: 50px;
+            position: relative;
         }
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        .heart-cat {
+            width: 120px;
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+        .rose-img {
+            max-width: 250px;
+            border-radius: 1rem;
+            margin: 1.5rem auto;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container shadow-2xl">
-        <div class="heart">❤️</div>
-        <h1 id="question" class="text-2xl font-bold text-slate-800 mt-4">Will you go on a date with me? ✨</h1>
+    <div class="card shadow-2xl" id="contentCard">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG94bmR6NXlyZzF4eG94bmR6NXlyZzF4eG94bmR6NXlyZzF4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/57Yp6z4OuxzFvR9v9f/giphy.gif" alt="Cute Cat" class="heart-cat">
+
+        <h1 id="headline" class="text-2xl font-bold text-gray-800">Akshita, will you be my Valentine?</h1>
         
-        <div class="mt-8 flex justify-center gap-4 relative h-16">
-            <button onclick="sayYes()" class="bg-rose-500 text-white px-8 py-2 rounded-full font-bold shadow-lg hover:bg-rose-600 transition">
-                Yes!
+        <div class="btn-container" id="btnGroup">
+            <button onclick="acceptProposal()" class="bg-rose-500 hover:bg-rose-600 text-white px-8 py-2 rounded-full font-bold shadow-lg transition transform active:scale-95">
+                Yes
             </button>
-            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()" class="bg-slate-200 text-slate-600 px-8 py-2 rounded-full font-bold">
+            <button id="noBtn" onmouseover="escape()" onclick="escape()" class="bg-gray-200 text-gray-600 px-8 py-2 rounded-full font-bold shadow-sm">
                 No
             </button>
         </div>
+        <p id="smallText" class="text-xs text-gray-400 mt-4 italic">"No" seems a bit shy 😺</p>
     </div>
 
     <script>
-        function moveNo() {
+        function escape() {
             const btn = document.getElementById('noBtn');
-            // स्क्रीन की रैंडम जगह पर बटन को भेज देना
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            // Button ko screen ke random kone mein bhej dena
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
             
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
+            btn.style.position = 'fixed';
         }
 
-        function sayYes() {
-            document.querySelector('.container').innerHTML = `
-                <div class="heart">💖</div>
-                <h1 class="text-2xl font-bold text-slate-800 mt-4">Yayyy! I knew it! 🥰</h1>
-                <p class="mt-2 text-slate-600">See you soon! ❤️</p>
+        function acceptProposal() {
+            const card = document.getElementById('contentCard');
+            // Yes click hone par pura content change kar dena
+            card.innerHTML = `
+                <h1 class="text-3xl font-bold text-rose-600 fade-in">Yayyy! I knew it! ❤️🥰</h1>
+                <p class="text-gray-600 mt-2 fade-in">You make me the happiest person!</p>
+                
+                <img src="https://i.ibb.co/3ykfLpL/crimson-love-red-rose-bouquet-1.webp" alt="Rose Bouquet" class="rose-img fade-in" style="display: block;">
+                
+                <p class="text-sm text-gray-500 mt-2 fade-in italic">"I love you!"</p>
             `;
         }
     </script>
