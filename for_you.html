@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #ffe4e6; /* Soft Pink */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 350px;
+        }
+        #noBtn {
+            position: absolute;
+            transition: 0.3s ease;
+        }
+        .heart {
+            color: #e11d48;
+            font-size: 4rem;
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container shadow-2xl">
+        <div class="heart">❤️</div>
+        <h1 id="question" class="text-2xl font-bold text-slate-800 mt-4">Will you go on a date with me? ✨</h1>
+        
+        <div class="mt-8 flex justify-center gap-4 relative h-16">
+            <button onclick="sayYes()" class="bg-rose-500 text-white px-8 py-2 rounded-full font-bold shadow-lg hover:bg-rose-600 transition">
+                Yes!
+            </button>
+            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()" class="bg-slate-200 text-slate-600 px-8 py-2 rounded-full font-bold">
+                No
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            // स्क्रीन की रैंडम जगह पर बटन को भेज देना
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function sayYes() {
+            document.querySelector('.container').innerHTML = `
+                <div class="heart">💖</div>
+                <h1 class="text-2xl font-bold text-slate-800 mt-4">Yayyy! I knew it! 🥰</h1>
+                <p class="mt-2 text-slate-600">See you soon! ❤️</p>
+            `;
+        }
+    </script>
+</body>
+</html>
