@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshita, will you be my Valentine?</title>
+    <title>For Akshita ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #fce7f3; /* Light Pink */
+            background-color: #fce7f3;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -24,21 +24,12 @@
             text-align: center;
             width: 90%;
             max-width: 450px;
-            transition: all 0.5s ease;
-        }
-        #noBtn {
-            position: absolute;
-            transition: 0.2s ease;
-            z-index: 10;
-        }
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 2rem;
-            height: 50px;
             position: relative;
+        }
+        /* No button ki styling aur transition */
+        #noBtn {
+            transition: all 0.2s ease;
+            z-index: 50;
         }
         .heart-cat {
             width: 120px;
@@ -49,8 +40,8 @@
             max-width: 250px;
             border-radius: 1rem;
             margin: 1.5rem auto;
-            display: none;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: block;
         }
         .fade-in {
             animation: fadeIn 0.8s ease-in forwards;
@@ -66,39 +57,46 @@
     <div class="card shadow-2xl" id="contentCard">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG94bmR6NXlyZzF4eG94bmR6NXlyZzF4eG94bmR6NXlyZzF4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/57Yp6z4OuxzFvR9v9f/giphy.gif" alt="Cute Cat" class="heart-cat">
 
-        <h1 id="headline" class="text-2xl font-bold text-gray-800">Akshita, will you be my Valentine?</h1>
+        <h1 class="text-2xl font-bold text-gray-800">Akshita, will you be my Valentine?</h1>
         
-        <div class="btn-container" id="btnGroup">
-            <button onclick="acceptProposal()" class="bg-rose-500 hover:bg-rose-600 text-white px-8 py-2 rounded-full font-bold shadow-lg transition transform active:scale-95">
-                Yes
+        <div class="flex justify-center items-center gap-5 mt-10 h-16 relative" id="btnWrapper">
+            <button onclick="acceptProposal()" class="bg-rose-500 hover:bg-rose-600 text-white px-8 py-2 rounded-full font-bold shadow-lg transition transform active:scale-95 z-20">
+                Yes ✅
             </button>
-            <button id="noBtn" onmouseover="escape()" onclick="escape()" class="bg-gray-200 text-gray-600 px-8 py-2 rounded-full font-bold shadow-sm">
-                No
+            
+            <button id="noBtn" onmouseover="escape()" onclick="escape()" class="bg-gray-200 text-gray-600 px-8 py-2 rounded-full font-bold shadow-md">
+                No ❌
             </button>
         </div>
-        <p id="smallText" class="text-xs text-gray-400 mt-4 italic">"No" seems a bit shy 😺</p>
+        <p class="text-xs text-gray-400 mt-6 italic">"No" is not an option! 😺</p>
     </div>
 
     <script>
         function escape() {
             const btn = document.getElementById('noBtn');
-            // Button ko screen ke random kone mein bhej dena
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
             
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-            btn.style.position = 'fixed';
+            // Screen ki width aur height nikalna
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // Random position generate karna
+            const newX = Math.random() * (windowWidth - btn.offsetWidth - 50);
+            const newY = Math.random() * (windowHeight - btn.offsetHeight - 50);
+            
+            // Button ko fixed position par bhej dena
+            btn.style.position = "fixed";
+            btn.style.left = newX + "px";
+            btn.style.top = newY + "px";
         }
 
         function acceptProposal() {
             const card = document.getElementById('contentCard');
-            // Yes click hone par pura content change kar dena
+            // Yes click hone par Rose image dikhegi
             card.innerHTML = `
                 <h1 class="text-3xl font-bold text-rose-600 fade-in">Yayyy! I knew it! ❤️🥰</h1>
                 <p class="text-gray-600 mt-2 fade-in">You make me the happiest person!</p>
                 
-                <img src="https://i.ibb.co/3ykfLpL/crimson-love-red-rose-bouquet-1.webp" alt="Rose Bouquet" class="rose-img fade-in" style="display: block;">
+                <img src="crimson-love-red-rose-bouquet_1.webp" alt="Rose Bouquet" class="rose-img fade-in">
                 
                 <p class="text-sm text-gray-500 mt-2 fade-in italic">"I love you!"</p>
             `;
